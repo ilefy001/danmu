@@ -228,12 +228,12 @@
 					platform:5,
 					openid:"ohf4ds7xZ-wJ6_QXE3Y_pHNTwBZ0",
 					page:1,
-					page_size:100,
+					page_size:10,
 					last_id:0
 				};
 				dataQuery = JSON.stringify(jsObject);
 				var data = {
-					sign:'a409c03a9732fa986bd6187655d3ea24',
+					sign:'caf49c07afa4b668ccbfa83c70b8cd2a',
 					data:dataQuery
 				};
 				$.ajax({
@@ -592,7 +592,7 @@
 					//					}
 
 					if(per_row_number < 20) { //低密集度分配模式
-						var delay = (1 / Math.sqrt(per_row_number)) * (.5 + ((play_count > 2) ? 1 : Math.min(Math.random(), .5)) * (Math.abs(Math.sin(row_idx)) * 2 + Math.random() * 6)) + 's';
+						var delay = (1 / Math.sqrt(per_row_number)) * (.5 + ((play_count > 2) ? 1 : Math.min(Math.random(), 5.5)) * (Math.abs(Math.sin(row_idx)) * 2 + Math.random() * 60)) + 's';
 					} else { //高密度分配模式
 						var delay = '0s';
 					}
