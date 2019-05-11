@@ -67,7 +67,6 @@
 	<script src="js/zepto.event.min.js?_version_=10.10.31"></script>
 	<script src='js/nb_tmpl.js?_version_=10.10.31'></script>
 	<script>
-		;
 		(function() {
 			//1是到场欢迎的，2是祝福语言
 			(function() {
@@ -223,32 +222,57 @@
 // 				];
 
 				var array = [];
-				var data = '';
-				var query = 'sign=dafddf8b1b25b8dcaf03eebfc1fbcfca&data=%7B%22platform%22%3A%225%22%2C%22openid%22%3A%22ohf4ds7xZ-wJ6_QXE3Y_pHNTwBZ0%22%2C%22page%22%3A2%2C%22page_size%22%3A3%2C%22last_id%22%3A0%7D';
+				// var data = '';
+				// var query = 'sign=cffe61fbb14b36011df1b8f48dab1426&data=%7B%22platform%22%3A%225%22%2C%22openid%22%3A%22ohf4ds7xZ-wJ6_QXE3Y_pHNTwBZ0%22%2C%22page%22%3A1%2C%22page_size%22%3A6%2C%22last_id%22%3A0%7D';
+				var jsObject = {
+					platform:5,
+					openid:"ohf4ds7xZ-wJ6_QXE3Y_pHNTwBZ0",
+					page:1,
+					page_size:100,
+					last_id:0
+				};
+				dataQuery = JSON.stringify(jsObject);
+				var data = {
+					sign:'a409c03a9732fa986bd6187655d3ea24',
+					data:dataQuery
+				};
 				$.ajax({
 					type: "post",
-					url: "http://dev.api.hd.zejicert.cn/api/Express/getList?"+query,
+					url: "http://dev.api.hd.zejicert.cn/api/Express/getList",
 					data: data,
 					dataType: "json",
 					success: function(res){
 						if (res.code != 1000) {
 
 						} else {
-							$.each(res.data, function (index, item) {
+							$.each(res.data.result, function (index, item) {
 								var tmp = {
-									'url': item.headimgurl,
-									'text':item.content,
-									'type':2
+									url : item.headimgurl,
+									text: item.content,
+									type:2
 								}
 								array.push(tmp);
 							});
 							console.log(array,'弹幕数组');
+							add_runner(array);
 						}
 					},
 					error:function () {
 					}
 				});
-
+// 				array = list;
+// 				var array = [
+// 					{
+// 						url: 'http://active.qiutianaimeili.com/one_year_head_35.jpg',
+// 						text: '西安的路好干净啊',
+// 						type: 2
+// 					}, {
+// 						url: 'http://active.qiutianaimeili.com/one_year_head_36.jpg',
+// 						text: '秋天爱美丽',
+// 						type: 2,
+// 					}
+// 				];
+// console.log(array,'示例数据');
 				var COLOR_LIBRARY = {
 					'wish': [{ //祝福语的配色方案
 						background: 'rgba(255,206,0,.96)',
@@ -411,7 +435,7 @@
 				//				var GLOBAL_MIN_NUMBER = 50; //最小出弹幕数量
 
 				var all_row_length = (allHeight / STEP) >> 0;
-				var per_row_number = 20; //每个跑道上赛跑者的数量
+				var per_row_number = 600; //每个跑道上赛跑者的数量
 
 				var global_row_length = all_row_length * per_row_number;
 
